@@ -839,7 +839,6 @@ void CreateControls(HWND hwnd) {
     CreateLabelAndEdit(hwnd, "TOKEN:", margin + Scale(15), innerY, groupW - Scale(30), editH, ID_TOKEN_EDIT, &hTokenEdit, FALSE);
     innerY += lineHeight + lineGap;
 
-    // 调整布局：交换“反代IP(域名)”和“优选IP(域名)”的位置
     CreateLabelAndEdit(hwnd, "优选IP(域名):", margin + Scale(15), innerY, halfW, editH, ID_IP_EDIT, &hIpEdit, FALSE);
     CreateLabelAndEdit(hwnd, "反代IP(域名):", col2X, innerY, halfW, editH, ID_PYIP_EDIT, &hPyipEdit, FALSE);
     innerY += lineHeight + lineGap;
@@ -1042,7 +1041,6 @@ void GetControlValues() {
     strcpy(cfg->listen, buf);
 
     GetWindowText(hTokenEdit, cfg->token, sizeof(cfg->token));
-    // 调整逻辑：交换“反代IP(域名)”和“优选IP(域名)”的处理顺序
     GetWindowText(hIpEdit, cfg->ip, sizeof(cfg->ip));
     GetWindowText(hPyipEdit, cfg->pyip, sizeof(cfg->pyip));
     GetWindowText(hDnsEdit, cfg->dns, sizeof(cfg->dns));
@@ -1051,12 +1049,9 @@ void GetControlValues() {
 
 void SetControlValues() {
     ServerConfig* cfg = GetCurrentServer();
-    
     SetWindowText(hServerEdit, cfg->server);
     SetWindowText(hListenEdit, cfg->listen);
-
     SetWindowText(hTokenEdit, cfg->token);
-    // 调整逻辑：交换“反代IP(域名)”和“优选IP(域名)”的处理顺序
     SetWindowText(hIpEdit, cfg->ip);
     SetWindowText(hPyipEdit, cfg->pyip);
     SetWindowText(hDnsEdit, cfg->dns);
@@ -1101,7 +1096,7 @@ void StartProcess() {
     HANDLE hRead, hWrite;
     if (!CreatePipe(&hRead, &hWrite, &sa, 0)) return;
 
-    STARTUPINFO si = {0}; // 修复警告：显式初始化所有字段
+    STARTUPINFO si = {0};
     si.cb = sizeof(si);
     si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
     si.hStdOutput = hWrite;
@@ -1121,14 +1116,14 @@ void StartProcess() {
         EnableWindow(hServerCombo, FALSE);
         
         char logMsg[512];
-        snprintf(logMsg, sizeof(logMsg), "[系统] 已启动服务器: %s\r\n", cfg->name); // 修复格式化字符串
+        snprintf(logMsg, sizeof(logMsg), "[系统] 已启动服务器: %s\r\n", cfg->name);
         AppendLog(logMsg);
     } else {
         CloseHandle(hRead);
         CloseHandle(hWrite);
         
         char errMsg[512];
-        snprintf(errMsg, sizeof(errMsg), "[错误] 启动失败，错误代码: %lu\r\n", GetLastError()); // 修复格式化字符串
+        snprintf(errMsg, sizeof(errMsg), "[错误] 启动失败，错误代码: %lu\r\n", GetLastError());
         AppendLog(errMsg);
     }
 }

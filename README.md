@@ -23,3 +23,6 @@ _worker.js用于CF上进行部署，workers、pages、snippets三种部署都适
 ### 使用GitHub Actions
 1. 启用Actions
 2. 本地部署build.bat
+
+### 🛠 开源代码引用
+- [https://t.me/CF_NAT](https://t.me/CF_NAT)

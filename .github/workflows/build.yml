@@ -38,8 +38,7 @@ jobs:
     - name: Compile main.c
       shell: cmd
       run: |
-        gcc -Wall -Wextra -std=c99 -finput-charset=UTF-8 -fexec-charset=GBK -Os -s -o ech-win-gui.exe resource.o main.c -luser32 -lkernel32 -lcomctl32 -lgdi32 -mwindows
-        
+        gcc -Wall -Wextra -std=c99 -finput-charset=UTF-8 -fexec-charset=GBK -Os -s -o ech-win-gui.exe resource.o main.c window.c server.c process.c log.c config.c tray.c autostart.c utils.c -luser32 -lkernel32 -lcomctl32 -lgdi32 -mwindows
     - name: Verify executable (修复语法错误)
       shell: cmd
       run: |

@@ -15,7 +15,7 @@
 #define IDI_APP_ICON 101 
 
 // 版本信息
-#define APP_VERSION "1.1"
+#define APP_VERSION "1.1.1"
 #define APP_TITLE "ech win 客户端 v" APP_VERSION
 
 // 缓冲区大小定义

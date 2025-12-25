@@ -25,7 +25,7 @@ _worker.js用于CF上进行部署，workers、pages、snippets三种部署都适
 
 ### 使用GitHub Actions
 1. 启用Actions
-2. 本地编译build.bat
+2. 本地编译采用CMake 3.10及以上版本
 
 ### 🛠 开源代码引用
 - [https://t.me/CF_NAT](https://t.me/CF_NAT)

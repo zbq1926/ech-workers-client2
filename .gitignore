@@ -57,6 +57,7 @@
 *.lto
 *.gcno
 *.gcda
+CMakelists.txt
 
 # 构建目录
 build/
